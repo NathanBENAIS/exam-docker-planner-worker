@@ -11,5 +11,8 @@ RUN npm install
 COPY . .
 
 EXPOSE 8080
+ENV MULT=true \
+  ADD=true
+
 
 CMD [ "node", "main.js"]
