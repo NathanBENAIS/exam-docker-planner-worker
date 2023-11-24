@@ -12,13 +12,22 @@ const args = () => ({ a: randInt(0, 40), b: randInt(0, 40) })
 const generateTasks = (i) =>
   new Array(i).fill(1).map((_) => ({ type: taskType(), args: args() }))
 
-  let workers = [
-    { url: 'http://worker:8080', id: '0', type: 'mult' },
-    { url: 'http://worker1:8070', id: '1', type: 'add' }
- ]
+  let workers = [];
+  
+  for (let i = 1; i <= 10; i++) {
+    const workerType = Math.random() < 0.5 ? 'mult' : 'add';
+        
+    const worker = {
+      url: "http://exam-docker-planner-worker-worker-"+ i + ":8080",
+      id: i.toString(),
+      type: workerType,
+    };
+    workers.push(worker); 
+  }
+  
+  let multWorkers = workers.filter((w) => w.type === 'mult');
+  let addWorkers = workers.filter((w) => w.type === 'add');
 
-let multWorkers = workers.filter((w) => w.type == 'mult');
-let addWorkers = workers.filter((w) => w.type == 'add');
 const app = express()
 app.use(express.json())
 app.use(

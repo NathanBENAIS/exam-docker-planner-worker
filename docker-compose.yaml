@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  planner:
+    build:
+      context: ./planner
+      dockerfile: Dockerfile.planner    
+    depends_on:
+      - worker
+    ports:
+      - "3000:3000"  
+    networks:
+      - mynetwork
+
+  worker:
+    build:
+      context: ./worker
+      dockerfile: Dockerfile.worker 
+    networks:
+      - mynetwork
+    deploy:
+      replicas: 10  
+
+networks:
+  mynetwork:
+    driver: bridge
