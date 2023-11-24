@@ -19,7 +19,7 @@ services:
     networks:
       - mynetwork
     deploy:
-      replicas: 10  
+      replicas: 30  
 
 networks:
   mynetwork:

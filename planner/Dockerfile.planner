@@ -11,6 +11,6 @@ RUN npm install
 COPY . .
 
 EXPOSE 3000
-ENV TASKS=5
+ENV TASKS=100
 
 CMD [ "node", "main.js"]
